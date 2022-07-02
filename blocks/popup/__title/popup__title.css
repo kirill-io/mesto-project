@@ -1,0 +1,10 @@
+.popup__title {
+  color: var(--colorBlack);
+  font-weight: 900;
+}
+
+@media screen and (max-width: 767px) {
+  .popup-edit__title {
+    align-self: center;
+  }
+}

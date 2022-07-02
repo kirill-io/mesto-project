@@ -1,0 +1,11 @@
+.popup-edit__save {
+  padding: 15px 0 13px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup-edit__save {
+    line-height: 1.21;
+    font-size: calc(1vw + 11px);
+  }
+}

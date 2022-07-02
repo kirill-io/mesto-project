@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Социальная сеть о путешествиях по России">
+  <meta name="keywords"
+    content="Социальная сеть, путешествия, Россия, море, лес, горы, плато, Карачаево-Черкесская Республика, Эльбрус, Домбай">
+  <meta name="author" content="Кирилл Бегей">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="root">
+  <header class="header">
+    <h1 class="title">
+      <svg class="logo">
+        <use href="./images/icons-sprite.svg#logo"></use>
+      </svg>
+    </h1>
+  </header>
+  <hr class="separator-line">
+  <main class="content">
+    <section class="profile">
+      <div class="avatar">
+        <picture>
+          <source srcset="./images/profile/avatar@2x.webp" media="(resolution:300dpi)">
+          <source srcset="./images/profile/avatar@2x.png" media="(resolution:300dpi)">
+          <source srcset="./images/profile/avatar@1x.webp">
+          <img class="avatar__image" src="./images/profile/avatar@1x.png"
+            alt="Аватар пользователя.">
+        </picture>
+      </div>
+      <div class="profile__info">
+        <h2 class="title profile__name">Жак-Ив Кусто</h2>
+        <p class="profile__description">Исследователь океана</p>
+        <button class="profile__edit">
+          <svg class="profile__edit-image">
+            <use href="./images/icons-sprite.svg#edit"></use>
+          </svg>
+        </button>
+      </div>
+      <buttton class="profile__add">
+        <svg class="profile__add-image">
+          <use href="./images/icons-sprite.svg#add"></use>
+        </svg>
+      </buttton>
+    </section>
+    <section class="elements">
+      <ul class="elements__list">
+        <li class="elements__item">
+          <div class="elements__image-container">
+            <picture>
+              <source srcset="./images/elements/karachaevsk@2x.webp" media="(resolution:300dpi)">
+              <source srcset="./images/elements/karachaevsk@2x.png" media="(resolution:300dpi)">
+              <source srcset="./images/elements/karachaevsk@1x.webp">
+              <img class="elements__image" src="./images/elements/karachaevsk@1x.png"
+                alt="Заброшенный храм в горах.">
+            </picture>
+          </div>
+          <div class="elements__text-container">
+            <h3 class="title elements__name">Карачаевск</h3>
+            <button class="elements__like">
+              <svg class="elements__like-image">
+                <use href="./images/icons-sprite.svg#like"></use>
+              </svg>
+            </button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <div class="elements__image-container">
+            <picture>
+              <source srcset="./images/elements/elbrus@2x.webp" media="(resolution:300dpi)">
+              <source srcset="./images/elements/elbrus@2x.png" media="(resolution:300dpi)">
+              <source srcset="./images/elements/elbrus@1x.webp">
+              <img class="elements__image" src="./images/elements/elbrus@1x.png"
+                alt="Гора Эльбрус на восходе солнца.">
+            </picture>
+          </div>
+          <div class="elements__text-container">
+            <h3 class="title elements__name">Гора Эльбрус</h3>
+            <button class="elements__like">
+              <svg class="elements__like-image">
+                <use href="./images/icons-sprite.svg#like"></use>
+              </svg>
+            </button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <div class="elements__image-container">
+            <picture>
+              <source srcset="./images/elements/dombaj@2x.webp" media="(resolution:300dpi)">
+              <source srcset="./images/elements/dombaj@2x.png" media="(resolution:300dpi)">
+              <source srcset="./images/elements/dombaj@1x.webp">
+              <img class="elements__image" src="./images/elements/dombaj@1x.png"
+                alt="Горный хребет Домбай.">
+            </picture>
+          </div>
+          <div class="elements__text-container">
+            <h3 class="title elements__name">Домбай</h3>
+            <button class="elements__like">
+              <svg class="elements__like-image">
+                <use href="./images/icons-sprite.svg#like"></use>
+              </svg>
+            </button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <div class="elements__image-container">
+            <picture>
+              <source srcset="./images/elements/elbrus@2x.webp" media="(resolution:300dpi)">
+              <source srcset="./images/elements/elbrus@2x.png" media="(resolution:300dpi)">
+              <source srcset="./images/elements/elbrus@1x.webp">
+              <img class="elements__image" src="./images/elements/elbrus@1x.png"
+                alt="Гора Эльбрус на восходе солнца.">
+            </picture>
+          </div>
+          <div class="elements__text-container">
+            <h3 class="title elements__name">Гора Эльбрус</h3>
+            <button class="elements__like">
+              <svg class="elements__like-image">
+                <use href="./images/icons-sprite.svg#like"></use>
+              </svg>
+            </button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <div class="elements__image-container">
+            <picture>
+              <source srcset="./images/elements/dombaj@2x.webp" media="(resolution:300dpi)">
+              <source srcset="./images/elements/dombaj@2x.png" media="(resolution:300dpi)">
+              <source srcset="./images/elements/dombaj@1x.webp">
+              <img class="elements__image" src="./images/elements/dombaj@1x.png"
+                alt="Горный хребет Домбай.">
+            </picture>
+          </div>
+          <div class="elements__text-container">
+            <h3 class="title elements__name">Домбай</h3>
+            <button class="elements__like">
+              <svg class="elements__like-image">
+                <use href="./images/icons-sprite.svg#like"></use>
+              </svg>
+            </button>
+          </div>
+        </li>
+        <li class="elements__item">
+          <div class="elements__image-container">
+            <picture>
+              <source srcset="./images/elements/karachaevsk@2x.webp" media="(resolution:300dpi)">
+              <source srcset="./images/elements/karachaevsk@2x.png" media="(resolution:300dpi)">
+              <source srcset="./images/elements/karachaevsk@1x.webp">
+              <img class="elements__image" src="./images/elements/karachaevsk@1x.png"
+                alt="Заброшенный храм в горах.">
+            </picture>
+          </div>
+          <div class="elements__text-container">
+            <h3 class="title elements__name">Карачаево-Черкесская Республика</h3>
+            <button class="elements__like">
+              <svg class="elements__like-image">
+                <use href="./images/icons-sprite.svg#like"></use>
+              </svg>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="copyright">&copy; 2022 Mesto Russia</div>
+  </footer>
+  <div class="popup">
+    <div class="popup__container popup-edit__container">
+      <h3 class="title popup__title popup-edit__title">Редактировать профиль</h3>
+      <form class="popup__form popup-edit__form">
+        <div class="popup-edit__inputs">
+          <input type="text" class="popup__input popup-edit__input" placeholder="Ваше имя">
+          <input type="text" class="popup__input popup-edit__input" placeholder="О себе">
+        </div>
+        <button class="popup__save popup-edit__save">Сохранить</button>
+      </form>
+      <button class="popup__close">
+        <svg class="popup__close-image">
+          <use href="./images/icons-sprite.svg#close"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

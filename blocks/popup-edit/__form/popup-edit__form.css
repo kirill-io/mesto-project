@@ -1,0 +1,11 @@
+.popup-edit__form {
+  row-gap: 48px;
+  width: 358px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup-edit__form {
+    width: 100%;
+    row-gap: 45px;
+  }
+}

@@ -1,0 +1,11 @@
+.popup-edit__title {
+  line-height: 29.05px;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup-edit__title {
+    line-height: 1.21;
+    font-size: calc(1vw + 15px);
+  }
+}

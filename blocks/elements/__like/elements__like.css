@@ -1,0 +1,15 @@
+.elements__like {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}
+
+.elements__like:hover .elements__like-image,
+.elements__like:focus .elements__like-image {
+  fill: rgba(0, 0, 0, 0.5);
+}

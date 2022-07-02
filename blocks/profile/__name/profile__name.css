@@ -1,0 +1,21 @@
+.profile__name {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-row-align: end;
+      align-self: end;
+  line-height: 48px;
+  font-size: 42px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__name {
+    line-height: 1.21;
+    font-size: calc(1vw + 24px);
+    margin-bottom: 7px;
+  }
+}
