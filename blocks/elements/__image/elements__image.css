@@ -1,8 +1,0 @@
-.elements__image {
-  position: absolute;
-  left: 50%;
-  height: 100%;
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
