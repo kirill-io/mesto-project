@@ -1,0 +1,22 @@
+.popup__close {
+  position: absolute;
+  top: -12.5%;
+  left: 102%;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.popup__close:hover .popup__close-image,
+.popup__close:focus .popup__close-image {
+  fill: rgba(255, 255, 255, .6);
+}
+
+@media screen and (max-width: 767px) {
+  .popup__close {
+    top: -11.5%;
+    left: 93%;
+  }
+}

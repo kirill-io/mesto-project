@@ -1,0 +1,36 @@
+.profile__edit {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-row-align: start;
+      align-self: start;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--colorBlack);
+  padding: 6px;
+  border: 1px solid var(--colorWhite);
+  -webkit-transition: border-color 0.3s ease-out;
+  -o-transition: border-color 0.3s ease-out;
+  transition: border-color 0.3s ease-out;
+}
+
+.profile__edit:hover,
+.profile__edit:focus {
+  border-color: rgba(255, 255, 255, .6);
+}
+
+.profile__edit:hover .profile__edit-image,
+.profile__edit:focus .profile__edit-image {
+  fill: rgba(255, 255, 255, .6);
+}
+
+@media screen and (max-width: 767px) {
+  .profile__edit {
+    position: relative;
+    top: 8px;
+    padding: 4.25px;
+  }
+}
