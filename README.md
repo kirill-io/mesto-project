@@ -19,5 +19,5 @@ ___
 * БЭМ-методология;
 * оптимизация изображений.
 ___
-Проект на GitHub Pages -
+Проект на GitHub Pages - https://kirill-begej.github.io/mesto-project/
 ___
