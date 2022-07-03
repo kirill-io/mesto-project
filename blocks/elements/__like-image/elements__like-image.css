@@ -1,9 +1,0 @@
-.elements__like-image {
-  display: block;
-  width: 22px;
-  height: 19px;
-  fill: var(--colorBlack);
-  -webkit-transition: fill 0.3s ease-out;
-  -o-transition: fill 0.3s ease-out;
-  transition: fill 0.3s ease-out;
-}
