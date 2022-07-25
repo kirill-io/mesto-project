@@ -1,0 +1,17 @@
+.element__remove {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  outline: none;
+  background: url('../../../images/element/recycle-bin.svg') center center/18px 19px no-repeat;
+  padding: 9.5px 9px;
+  border: none;
+  -webkit-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+
+.element__remove:hover {
+  opacity: .6;
+}

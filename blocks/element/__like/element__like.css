@@ -1,0 +1,17 @@
+.element__like {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  cursor: pointer;
+  outline: none;
+  background: url('../../../images/element/like.svg') center center/22px 19px no-repeat;
+  padding: 9.5px 11px;
+  border: none;
+  -webkit-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+
+.element__like:hover {
+  opacity: .5;
+}
