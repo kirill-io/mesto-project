@@ -81,7 +81,7 @@ function checkNamePalce (namePlace) {
 };
 
 function addNewElement (place, link) {
-  let objPlace = {};
+  const objPlace = {};
   objPlace.name = checkNamePalce(place);
   objPlace.link = link;
   return objPlace;
