@@ -20,23 +20,23 @@ const elementsList = document.querySelector('.elements__list');
 const elementName = document.querySelector('.element__name');
 const elementImage = document.querySelector('.element__image');
 
-function createElement(objData, elementCloneClass, elementCloneNameClass, elementCloneImageClass, elementCloneLikeClass, elementCloneRemoveClass, template) {
+function createElement(objData) {
   let element;
-  element = template.querySelector(elementCloneClass).cloneNode(true);
-  element.querySelector(elementCloneNameClass).textContent = objData.name;
-  element.querySelector(elementCloneImageClass).src = objData.link;
-  element.querySelector(elementCloneImageClass).addEventListener('click', () => {
+  element = elementTemplate.querySelector('.element').cloneNode(true);
+  element.querySelector('.element__name').textContent = objData.name;
+  element.querySelector('.element__image').src = objData.link;
+  element.querySelector('.element__image').addEventListener('click', () => {
     openedPopup(popupImage);
     popupPicture.src = objData.link;
   });
-  element.querySelector(elementCloneRemoveClass).addEventListener('click', removeElement);
-  element.querySelector(elementCloneLikeClass).addEventListener('click', putLike);
+  element.querySelector('.element__remove').addEventListener('click', removeElement);
+  element.querySelector('.element__like').addEventListener('click', putLike);
   return element;
 };
 
-function renderInitialElements (arrayData, elementCloneClass, elementCloneNameClass, elementCloneImageClass, elementCloneLikeClass, elementCloneRemoveClass, template, elementInsert) {
+function renderInitialElements (arrayData) {
   for (let i = 0; i < arrayData.length; i++) {
-    elementInsert.append(createElement(arrayData[i], elementCloneClass, elementCloneNameClass, elementCloneImageClass, elementCloneLikeClass, elementCloneRemoveClass, template));
+    elementsList.append(createElement(arrayData[i]));
   }
 };
 
@@ -70,7 +70,7 @@ function formEditSubmitHandler (e) {
 
 function formAddSubmitHandler(e) {
   e.preventDefault();
-  renderNewElement(addNewElement(inputPlace.value, inputLink.value), '.element', '.element__name', '.element__image', '.element__like', '.element__remove', elementTemplate, elementsList);
+  renderNewElement(addNewElement(inputPlace.value, inputLink.value));
   inputPlace.value = '';
   inputLink.value = '';
   closedPopup(popupAdd);
@@ -87,11 +87,11 @@ function addNewElement (place, link) {
   return objPlace;
 };
 
-function renderNewElement (objNewElement, elementCloneClass, elementCloneNameClass, elementCloneImageClass, elementCloneLikeClass, elementCloneRemoveClass, template, elementInsert) {
-  elementInsert.prepend(createElement(objNewElement, elementCloneClass, elementCloneNameClass, elementCloneImageClass, elementCloneLikeClass, elementCloneRemoveClass, template));
+function renderNewElement (objNewElement) {
+  elementsList.prepend(createElement(objNewElement));
 };
 
-renderInitialElements(initialElements, '.element', '.element__name', '.element__image', '.element__like', '.element__remove', elementTemplate, elementsList);
+renderInitialElements(initialElements);
 
 buttonEditProfile.addEventListener('click', () => {
   openedPopup(popupEdit);
