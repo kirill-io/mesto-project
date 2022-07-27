@@ -15,6 +15,7 @@ const inputLink = popupAdd.querySelector('.popup__input_type_link');
 const popupImage = document.querySelector('#popupImage');
 const buttonPopupImageClose = popupImage.querySelector('.popup__close');
 const popupPicture = popupImage.querySelector('.popup__image');
+const popupPictureText = popupImage.querySelector('.popup__image-text');
 const elementTemplate = document.querySelector('#elementTemplate').content;
 const elementsList = document.querySelector('.elements__list');
 const elementName = document.querySelector('.element__name');
@@ -30,6 +31,7 @@ function createElement(objData) {
     openedPopup(popupImage);
     popupPicture.src = objData.link;
     popupPicture.alt = `${objData.name}.`;
+    popupPictureText.textContent = objData.name;
   });
   element.querySelector('.element__remove').addEventListener('click', removeElement);
   element.querySelector('.element__like').addEventListener('click', putLike);
