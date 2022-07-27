@@ -65,14 +65,14 @@ function filingFields(name, description, nameField, descriptionField) {
   descriptionField.value = description.textContent;
 };
 
-function formEditSubmitHandler (e) {
+function editProfileFormSubmitHandler (e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
   profileDesc.textContent = inputDesc.value;
   closedPopup(popupEdit);
 };
 
-function formAddSubmitHandler(e) {
+function addElementFormSubmitHandler(e) {
   e.preventDefault();
   renderNewElement(addNewElement(inputPlace.value, inputLink.value));
   inputPlace.value = '';
@@ -106,7 +106,7 @@ buttonPopupEditClose.addEventListener('click', () => {
   closedPopup(popupEdit);
 });
 
-formEdit.addEventListener('submit', formEditSubmitHandler);
+formEdit.addEventListener('submit', editProfileFormSubmitHandler);
 
 buttonAddPlace.addEventListener('click', () => {
   openedPopup(popupAdd);
@@ -116,7 +116,7 @@ buttonPopupAddClose.addEventListener('click', () => {
   closedPopup(popupAdd);
 });
 
-formAdd.addEventListener('submit', formAddSubmitHandler);
+formAdd.addEventListener('submit', addElementFormSubmitHandler);
 
 buttonPopupImageClose.addEventListener('click', () => {
   closedPopup(popupImage);
