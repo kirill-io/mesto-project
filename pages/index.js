@@ -23,11 +23,13 @@ const elementImage = document.querySelector('.element__image');
 
 function createElement(objData) {
   let element;
+  let elementImage;
   element = elementTemplate.querySelector('.element').cloneNode(true);
   element.querySelector('.element__name').textContent = objData.name;
-  element.querySelector('.element__image').src = objData.link;
-  element.querySelector('.element__image').alt = `${objData.name}.`;
-  element.querySelector('.element__image').addEventListener('click', () => {
+  elementImage = element.querySelector('.element__image');
+  elementImage.src = objData.link;
+  elementImage.alt = `${objData.name}.`;
+  elementImage.addEventListener('click', () => {
     openedPopup(popupImage);
     popupPicture.src = objData.link;
     popupPicture.alt = `${objData.name}.`;
