@@ -25,9 +25,11 @@ function createElement(objData) {
   element = elementTemplate.querySelector('.element').cloneNode(true);
   element.querySelector('.element__name').textContent = objData.name;
   element.querySelector('.element__image').src = objData.link;
+  element.querySelector('.element__image').alt = `${objData.name}.`;
   element.querySelector('.element__image').addEventListener('click', () => {
     openedPopup(popupImage);
     popupPicture.src = objData.link;
+    popupPicture.alt = `${objData.name}.`;
   });
   element.querySelector('.element__remove').addEventListener('click', removeElement);
   element.querySelector('.element__like').addEventListener('click', putLike);
