@@ -75,9 +75,9 @@ function editProfileFormSubmitHandler (e) {
 function addElementFormSubmitHandler(e) {
   e.preventDefault();
   renderNewElement(addNewElement(inputPlace.value, inputLink.value));
+  closedPopup(popupAdd);
   inputPlace.value = '';
   inputLink.value = '';
-  closedPopup(popupAdd);
 };
 
 function checkNamePalce (namePlace) {
