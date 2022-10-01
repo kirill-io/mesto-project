@@ -11,8 +11,7 @@
   transition: opacity .3s ease-out;
 }
 
-.profile__add:hover,
-.profile__add:focus {
+.profile__add:hover {
   opacity: .6;
 }
 

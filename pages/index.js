@@ -56,8 +56,22 @@ function putLike(e) {
   e.target.classList.toggle('element__like_active');
 };
 
+const closePopupByOverlayAndEscape = (popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup')) {
+      closedPopup(window[evt.target.id]);
+    }
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key.toLowerCase() === 'escape') {
+      closedPopup(popup);
+    }
+  });
+};
+
 function openedPopup(popup) {
   popup.classList.add('popup_opened');
+  closePopupByOverlayAndEscape(popup);
 };
 
 function closedPopup(popup) {
@@ -122,37 +136,6 @@ const clearFields = (form) => {
     inputElement.value = '';
   });
 };
-
-renderInitialElements(initialElements);
-
-buttonEditProfile.addEventListener('click', () => {
-  filingFields(profileName, profileDesc, inputName, inputDesc);
-  resetForm (formEdit, buttonPopupEditSave);
-  openedPopup(popupEdit);
-});
-
-buttonPopupEditClose.addEventListener('click', () => {
-  closedPopup(popupEdit);
-});
-
-formEdit.addEventListener('submit', editProfileFormSubmitHandler);
-
-buttonAddPlace.addEventListener('click', () => {
-  clearFields(formAdd);
-  resetForm (formAdd, buttonPopupAddSave);
-  openedPopup(popupAdd);
-});
-
-buttonPopupAddClose.addEventListener('click', () => {
-  closedPopup(popupAdd);
-});
-
-buttonPopupAddSave.addEventListener('click', addElementFormSubmitHandler);
-
-buttonPopupImageClose.addEventListener('click', () => {
-  closedPopup(popupImage);
-  popupPicture.src = '';
-});
 
 const selectionErrorMessage = (formInput) => {
   if (formInput.value.length === 0) {
@@ -224,5 +207,36 @@ const enableValidation = () => {
     setEventListener(formElement, formElement.elements.popupSave);
   });
 };
+
+renderInitialElements(initialElements);
+
+buttonEditProfile.addEventListener('click', () => {
+  filingFields(profileName, profileDesc, inputName, inputDesc);
+  resetForm (formEdit, buttonPopupEditSave);
+  openedPopup(popupEdit);
+});
+
+buttonPopupEditClose.addEventListener('click', () => {
+  closedPopup(popupEdit);
+});
+
+formEdit.addEventListener('submit', editProfileFormSubmitHandler);
+
+buttonAddPlace.addEventListener('click', () => {
+  clearFields(formAdd);
+  resetForm (formAdd, buttonPopupAddSave);
+  openedPopup(popupAdd);
+});
+
+buttonPopupAddClose.addEventListener('click', () => {
+  closedPopup(popupAdd);
+});
+
+buttonPopupAddSave.addEventListener('click', addElementFormSubmitHandler);
+
+buttonPopupImageClose.addEventListener('click', () => {
+  closedPopup(popupImage);
+  popupPicture.src = '';
+});
 
 enableValidation();
