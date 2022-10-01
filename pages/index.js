@@ -7,12 +7,13 @@ const buttonPopupEditClose = popupEdit.querySelector('.popup__close');
 const formEdit = document.forms.editForm;
 const inputName = formEdit.elements.inputName;
 const inputDesc = formEdit.elements.inputDescription;
-const buttonPopupEditSave = formEdit.elements.popupEditSave;
+const buttonPopupEditSave = popupEdit.querySelector('.popup__save');
 const popupAdd = document.querySelector('#popupAdd');
 const buttonPopupAddClose = popupAdd.querySelector('.popup__close');
-const formAdd = popupAdd.querySelector('.popup__form');
-const inputPlace = popupAdd.querySelector('.popup__input_type_place');
-const inputLink = popupAdd.querySelector('.popup__input_type_link');
+const formAdd = document.forms.addForm;
+const inputPlace = formAdd.elements.inputPlace;
+const inputLink = formAdd.elements.inputLink;
+const buttonPopupAddSave = formAdd.elements.popupSave;
 const popupImage = document.querySelector('#popupImage');
 const buttonPopupImageClose = popupImage.querySelector('.popup__close');
 const popupPicture = popupImage.querySelector('.popup__image');
@@ -98,11 +99,36 @@ function renderNewElement (objNewElement) {
   elementsList.prepend(createElement(objNewElement));
 };
 
+const resetInputs = (inputElement, elementError, formButton) => {
+  inputElement.classList.remove('popup__input_type_error');
+  elementError.textContent = '';
+  elementError.classList.remove('popup__input-error_active');
+  formButton.disabled = false;
+  formButton.classList.remove('popup__save_inactive');
+};
+
+const resetForm = (form, formButton) => {
+  const inputList = Array.from(form.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) => {
+    const elementError = searchErrorMessage(inputElement);
+    resetInputs(inputElement, elementError, formButton);
+  });
+  toggleButtonState(inputList, formButton);
+};
+
+const clearFields = (form) => {
+  const inputList = Array.from(form.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) => {
+    inputElement.value = '';
+  });
+};
+
 renderInitialElements(initialElements);
 
 buttonEditProfile.addEventListener('click', () => {
-  openedPopup(popupEdit);
   filingFields(profileName, profileDesc, inputName, inputDesc);
+  resetForm (formEdit, buttonPopupEditSave);
+  openedPopup(popupEdit);
 });
 
 buttonPopupEditClose.addEventListener('click', () => {
@@ -112,6 +138,8 @@ buttonPopupEditClose.addEventListener('click', () => {
 formEdit.addEventListener('submit', editProfileFormSubmitHandler);
 
 buttonAddPlace.addEventListener('click', () => {
+  clearFields(formAdd);
+  resetForm (formAdd, buttonPopupAddSave);
   openedPopup(popupAdd);
 });
 
@@ -119,14 +147,12 @@ buttonPopupAddClose.addEventListener('click', () => {
   closedPopup(popupAdd);
 });
 
-formAdd.addEventListener('submit', addElementFormSubmitHandler);
+buttonPopupAddSave.addEventListener('click', addElementFormSubmitHandler);
 
 buttonPopupImageClose.addEventListener('click', () => {
   closedPopup(popupImage);
   popupPicture.src = '';
 });
-
-
 
 const selectionErrorMessage = (formInput) => {
   if (formInput.value.length === 0) {
@@ -135,6 +161,8 @@ const selectionErrorMessage = (formInput) => {
     return `Минимальное количество символов: ${formInput.getAttribute('minlength')}. Длина текста сейчас: ${formInput.value.length} символ.`;
   } else if (formInput.validity.patternMismatch) {
     return formInput.dataset.errorMessage;
+  } else if (formInput.type === 'url') {
+    return formInput.validationMessage;
   }
 };
 
@@ -170,25 +198,31 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
     buttonElement.classList.add('popup__save_inactive');
   } else {
+    buttonElement.disabled = false;
     buttonElement.classList.remove('popup__save_inactive');
   }
 };
 
-const setEventListener = (form) => {
+const setEventListener = (form, buttonSave) => {
   const inputList = Array.from(form.querySelectorAll('.popup__input'));
-  if (!profileName.textContent.length || !profileDesc.textContent.length) {
-    toggleButtonState(inputList, buttonPopupEditSave);
-  }
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', (evt) => {
       const inputError = searchErrorMessage(evt.target);
       const inputMessage = selectionErrorMessage(evt.target);
       isValid(evt.target, inputError, inputMessage);
-      toggleButtonState(inputList, buttonPopupEditSave);
+      toggleButtonState(inputList, buttonSave);
     });
   });
 };
 
-setEventListener(formEdit);
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((formElement) => {
+    setEventListener(formElement, formElement.elements.popupSave);
+  });
+};
+
+enableValidation();
