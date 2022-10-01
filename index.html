@@ -40,10 +40,18 @@
   <div class="popup" id="popupEdit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="editForm" class="popup__form">
-        <input type="text" name="inputName" class="popup__input popup__input_type_name" placeholder="Ваше имя">
-        <input type="text" name="inputDescription" class="popup__input popup__input_type_description" placeholder="О себе">
-        <button class="popup__save" type="submit">Сохранить</button>
+      <form name="editForm" class="popup__form" novalidate>
+        <div class="popup__inputs">
+          <label class="popup__field">
+            <input type="text" name="inputName" class="popup__input" id="input-name" placeholder="Ваше имя" minlength="2" maxlength="40" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё| |\-]+[^ |^\-|^0-9]$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." required>
+            <span class="input-name-error popup__input-error"></span>
+          </label>
+          <label class="popup__field">
+            <input type="text" name="inputDescription" class="popup__input" id="input-desc" placeholder="О себе" minlength="2" maxlength="200" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё| |\-]+[^ |^\-|^0-9]$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." required>
+            <span class="input-desc-error popup__input-error">Вы пропустили это поле.</span>
+          </label>
+        </div>
+        <button class="popup__save" name="popupEditSave" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" type="button"  aria-label="Закрыть окно редактирования профиля"></button>
     </div>

@@ -4,9 +4,10 @@ const buttonEditProfile = document.querySelector('.profile__edit');
 const buttonAddPlace = document.querySelector('.profile__add');
 const popupEdit = document.querySelector('#popupEdit');
 const buttonPopupEditClose = popupEdit.querySelector('.popup__close');
-const formEdit = popupEdit.querySelector('.popup__form');
-const inputName = popupEdit.querySelector('.popup__input_type_name');
-const inputDesc = popupEdit.querySelector('.popup__input_type_description');
+const formEdit = document.forms.editForm;
+const inputName = formEdit.elements.inputName;
+const inputDesc = formEdit.elements.inputDescription;
+const buttonPopupEditSave = formEdit.elements.popupEditSave;
 const popupAdd = document.querySelector('#popupAdd');
 const buttonPopupAddClose = popupAdd.querySelector('.popup__close');
 const formAdd = popupAdd.querySelector('.popup__form');
@@ -124,3 +125,70 @@ buttonPopupImageClose.addEventListener('click', () => {
   closedPopup(popupImage);
   popupPicture.src = '';
 });
+
+
+
+const selectionErrorMessage = (formInput) => {
+  if (formInput.value.length === 0) {
+    return 'Вы пропустили это поле.';
+  } else if (formInput.value.length >= 1 && formInput.value.length < formInput.getAttribute('minlength')) {
+    return `Минимальное количество символов: ${formInput.getAttribute('minlength')}. Длина текста сейчас: ${formInput.value.length} символ.`;
+  } else if (formInput.validity.patternMismatch) {
+    return formInput.dataset.errorMessage;
+  }
+};
+
+const searchErrorMessage = (formInput) => {
+  return document.querySelector(`.${formInput.id}-error`);
+};
+
+const showInputError = (element, elementError, elementMessage) => {
+  element.classList.add('popup__input_type_error');
+  elementError.textContent = elementMessage;
+  elementError.classList.add('popup__input-error_active');
+};
+
+const hideInputError = (element, elementError) => {
+  element.classList.remove('popup__input_type_error');
+  elementError.textContent = '';
+  elementError.classList.remove('popup__input-error_active');
+};
+
+const isValid = (formInput, inputError, inputMessage) => {
+  if (!formInput.validity.valid) {
+    showInputError(formInput, inputError, inputMessage);
+  } else {
+    hideInputError(formInput, inputError);
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__save_inactive');
+  } else {
+    buttonElement.classList.remove('popup__save_inactive');
+  }
+};
+
+const setEventListener = (form) => {
+  const inputList = Array.from(form.querySelectorAll('.popup__input'));
+  if (!profileName.textContent.length || !profileDesc.textContent.length) {
+    toggleButtonState(inputList, buttonPopupEditSave);
+  }
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', (evt) => {
+      const inputError = searchErrorMessage(evt.target);
+      const inputMessage = selectionErrorMessage(evt.target);
+      isValid(evt.target, inputError, inputMessage);
+      toggleButtonState(inputList, buttonPopupEditSave);
+    });
+  });
+};
+
+setEventListener(formEdit);

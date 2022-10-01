@@ -1,0 +1,9 @@
+.popup__save_inactive {
+  color: var(--colorBlack);
+  background-color: var(--colorWhite);
+  border: 1px solid var(--colorBlack);
+  padding: 14px 0 12px;
+  opacity: .2;
+  cursor: auto;
+  pointer-events: none;
+}
