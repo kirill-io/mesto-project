@@ -1,3 +1,6 @@
+import './index.css';
+import {initialElements} from '../vendor/elementsData.js';
+
 const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
 const buttonEditProfile = document.querySelector('.profile__edit');

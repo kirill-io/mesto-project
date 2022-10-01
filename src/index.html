@@ -8,17 +8,16 @@
   <meta name="keywords"
     content="Социальная сеть, путешествия, Россия, море, лес, горы, плато, Карачаево-Черкесская Республика, Эльбрус, Домбай">
   <meta name="author" content="Кирилл Бегей">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Социальная сеть Место</title>
 </head>
 <body class="root">
   <header class="header">
-    <img src="./images/header/logo.svg" alt="Логотип сайта Место." class="logo"/>
+    <img src="<%=require('./images/header/logo.svg')%>" alt="Логотип сайта Место." class="logo"/>
   </header>
   <main class="content">
     <section class="profile">
       <div class="profile__avatar">
-        <img class="profile__avatar-image" src="./images/profile/avatar.png"
+        <img class="profile__avatar-image" src="<%=require('./images/profile/avatar.png')%>"
             alt="Аватар пользователя."/>
       </div>
       <div class="profile__info">
@@ -92,7 +91,6 @@
       </div>
     </li>
   </template>
-  <script src="./vendor/elementsData.js"></script>
-  <script src="./pages/index.js"></script>
+  <script type="module" src="./vendor/elementsData.js"></script>
 </body>
 </html>
