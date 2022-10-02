@@ -1,4 +1,4 @@
-import {popupPictureText, elementTemplate, elementsList, popupPicture} from '../pages/index.js';
+import {popupPictureText, elementTemplate, elementsList, popupPicture} from './index.js';
 import {openedPopup} from '../components/utils.js';
 
 export const renderInitialElements = (arrayData) => {

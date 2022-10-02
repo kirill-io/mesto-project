@@ -1,10 +1,10 @@
-import './index.css';
-import {initialElements} from '../components/elementsData.js';
-import {objSettings} from '../components/objSettings.js';
-import {enableValidation} from '../components/validate.js'
-import {renderInitialElements} from '../components/card.js';
-import {filingFields, resetForm, editProfileFormSubmitHandler, clearFields, addElementFormSubmitHandler} from '../components/modal.js';
-import {openedPopup, closedPopup} from '../components/utils.js';
+import '../pages/index.css';
+import {initialElements} from './elementsData.js';
+import {objSettings} from './objSettings.js';
+import {enableValidation} from './validate.js'
+import {renderInitialElements} from './card.js';
+import {filingFields, resetForm, editProfileFormSubmitHandler, clearFields, addElementFormSubmitHandler} from './modal.js';
+import {openedPopup, closedPopup} from './utils.js';
 
 export const profileName = document.querySelector('.profile__name');
 export const profileDesc = document.querySelector('.profile__description');

@@ -1,4 +1,4 @@
-import {profileName, profileDesc, inputName, inputDesc, inputPlace, inputLink} from '../pages/index.js';
+import {profileName, profileDesc, inputName, inputDesc, inputPlace, inputLink} from './index.js';
 import {closedPopup, toggleButtonState} from '../components/utils.js';
 import {searchErrorMessage} from '../components/validate.js';
 import {renderNewElement, addNewElement} from '../components/card.js';
