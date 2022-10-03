@@ -1,5 +1,3 @@
-import {toggleButtonState} from '../components/utils.js';
-
 const selectionErrorMessage = (formInput) => {
   if (formInput.value.length === 0) {
     return 'Вы пропустили это поле.';
@@ -36,6 +34,16 @@ const isValid = (formInput, inputError, inputMessage, inputErrorClass, errorClas
   }
 };
 
+const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add(inactiveButtonClass);
+  } else {
+    buttonElement.disabled = false;
+    buttonElement.classList.remove(inactiveButtonClass);
+  }
+};
+
 export const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -54,9 +62,37 @@ const setEventListener = (form, buttonSave, inputSelector, inputErrorClass, erro
   });
 };
 
-export const enableValidation = (objSettings) => {
-  const formList = Array.from(document.querySelectorAll(objSettings.formSelector));
+export const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
   formList.forEach((formElement) => {
-    setEventListener(formElement, formElement.elements.popupSave, objSettings.inputSelector, objSettings.inputErrorClass, objSettings.errorClass, objSettings.inactiveButtonClass);
+    setEventListener(formElement, formElement.elements.popupSave, validationConfig.inputSelector, validationConfig.inputErrorClass, validationConfig.errorClass, validationConfig.inactiveButtonClass);
+  });
+};
+
+const disableSubmitButton = (button) => {
+  button.disabled = false;
+};
+
+const resetInputs = (inputElement, elementError, formButton, inputErrorClass, errorClass, inactiveButtonClass) => {
+  inputElement.classList.remove(inputErrorClass);
+  elementError.textContent = '';
+  elementError.classList.remove(errorClass);
+  disableSubmitButton(formButton);
+  formButton.classList.remove(inactiveButtonClass);
+};
+
+export const resetForm = (form, formButton, inactiveButtonClass, inputSelector, inputErrorClass, errorClass) => {
+  const inputList = Array.from(form.querySelectorAll(inputSelector));
+  inputList.forEach((inputElement) => {
+    const elementError = searchErrorMessage(inputElement);
+    resetInputs(inputElement, elementError, formButton, inputErrorClass, errorClass, inactiveButtonClass);
+  });
+  toggleButtonState(inputList, formButton, inactiveButtonClass);
+};
+
+export const clearFields = (form, inputSelector) => {
+  const inputList = Array.from(form.querySelectorAll(inputSelector));
+  inputList.forEach((inputElement) => {
+    inputElement.value = '';
   });
 };
