@@ -10,7 +10,7 @@
   <meta name="author" content="Кирилл Бегей">
   <title>Социальная сеть Место</title>
 </head>
-<body class="root">
+<body class="root" data-type-popup="popupImage">
   <header class="header">
     <img src="<%=require('./images/header/logo.svg')%>" alt="Логотип сайта Место." class="logo"/>
   </header>
@@ -42,11 +42,11 @@
       <form name="editForm" class="popup__form form-popupEdit" novalidate>
         <div class="popup__inputs">
           <label class="popup__field">
-            <input type="text" name="inputName" class="popup__input" id="input-name" placeholder="Ваше имя" minlength="2" maxlength="40" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." required>
+            <input type="text" name="inputName" class="popup__input" id="input-name" placeholder="Ваше имя" minlength="2" maxlength="40" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." data-type-popup="popupEdit" required>
             <span class="input-name-error popup__input-error"></span>
           </label>
           <label class="popup__field">
-            <input type="text" name="inputDescription" class="popup__input" id="input-desc" placeholder="О себе" minlength="2" maxlength="200" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." required>
+            <input type="text" name="inputDescription" class="popup__input" id="input-desc" placeholder="О себе" minlength="2" maxlength="200" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." data-type-popup="popupEdit" required>
             <span class="input-desc-error popup__input-error">Вы пропустили это поле.</span>
           </label>
         </div>
@@ -61,11 +61,11 @@
       <form name="addForm" class="popup__form" novalidate>
         <div class="popup__inputs">
           <label class="popup__field">
-            <input type="text" name="inputPlace" class="popup__input" id="input-place" placeholder="Название" minlength="2" maxlength="30" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." required>
+            <input type="text" name="inputPlace" class="popup__input" id="input-place" placeholder="Название" minlength="2" maxlength="30" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." data-type-popup="popupAdd" required>
             <span class="input-place-error popup__input-error"></span>
           </label>
           <label class="popup__field">
-            <input type="url" name="inputLink" class="popup__input" id="input-link" placeholder="Ссылка на картинку" required>
+            <input type="url" name="inputLink" class="popup__input" id="input-link" placeholder="Ссылка на картинку" data-type-popup="popupAdd" required>
             <span class="input-link-error popup__input-error"></span>
           </label>
         </div>
@@ -74,7 +74,7 @@
       <button class="popup__close" type="button"  aria-label="Закрыть окно добаления новой публикации"></button>
     </div>
   </div>
-  <div class="popup popup_type_image" id="popupImage">
+  <div class="popup" id="popupImage">
     <figure class="popup__image-container">
       <img class="popup__image"/>
       <figcaption class="popup__image-text"></figcaption>

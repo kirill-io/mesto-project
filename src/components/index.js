@@ -3,7 +3,7 @@ import {initialElements} from './elementsData.js';
 import * as constants from './constants.js';
 import {enableValidation, resetForm, clearFields} from './validate.js'
 import {createElement} from './card.js';
-import {openPopup, closePopup, fillInFormInputs, editProfileFormSubmitHandler, addElementFormSubmitHandler} from './modal.js';
+import {openPopup, closePopup, fillInFormInputs, editProfileFormSubmitHandler, addPopupCloseHandlerOnClickOnOverlay} from './modal.js';
 import {} from './utils.js';
 
 const buttonEditProfile = document.querySelector('.profile__edit');
@@ -15,11 +15,29 @@ const popupAdd = document.querySelector('#popupAdd');
 const buttonPopupAddClose = popupAdd.querySelector('.popup__close');
 const popupImage = document.querySelector('#popupImage');
 const buttonPopupImageClose = popupImage.querySelector('.popup__close');
+const popups = document.querySelectorAll('.popup');
 
 const renderInitialElements = (arrayData) => {
   for (let i = 0; i < arrayData.length; i++) {
     constants.elementsList.append(createElement(arrayData[i]));
   }
+};
+
+const addNewElement = (placeName, placeLink) => {
+  const place = {};
+  place.name = checkPlaceName(placeName);
+  place.link = placeLink;
+  return place;
+};
+
+const renderNewElement = (objNewElement) => {
+  elementsList.prepend(createElement(objNewElement));
+};
+
+const addElementFormSubmitHandler = (e) => {
+  e.preventDefault();
+  renderNewElement(addNewElement(inputPlace.value, inputLink.value));
+  closePopup(popupAdd);
 };
 
 renderInitialElements(initialElements);
@@ -52,5 +70,7 @@ buttonPopupImageClose.addEventListener('click', () => {
   closePopup(popupImage);
   constants.popupPicture.src = '';
 });
+
+popups.forEach((popup) => addPopupCloseHandlerOnClickOnOverlay(popup));
 
 enableValidation(constants.validationConfig);
