@@ -1,0 +1,10 @@
+.popup__delete {
+  color: var(--colorWhite);
+  font-size: 18px;
+  line-height: 22px;
+  border: none;
+  background-color: var(--colorBlack);
+  padding: 14px 0;
+  cursor: pointer;
+  border-radius: 2px;
+}

@@ -90,9 +90,6 @@ export const resetForm = (form, formButton, inactiveButtonClass, inputSelector, 
   toggleButtonState(inputList, formButton, inactiveButtonClass);
 };
 
-export const clearFields = (form, inputSelector) => {
-  const inputList = Array.from(form.querySelectorAll(inputSelector));
-  inputList.forEach((inputElement) => {
-    inputElement.value = '';
-  });
+export const clearFields = (form) => {
+  form.reset();
 };

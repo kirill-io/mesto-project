@@ -1,0 +1,7 @@
+.element__like-amount {
+  color: var(--colorBlack);
+  align-self: center;
+  font-size: 13px;
+  line-height: 13px;
+  height: 13px;
+}

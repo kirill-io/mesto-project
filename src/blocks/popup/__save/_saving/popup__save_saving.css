@@ -1,0 +1,8 @@
+.popup__save_saving {
+  cursor: auto;
+  pointer-events: none;
+}
+
+.popup__save_saving:hover {
+  background-color: var(--colorBlack);
+}

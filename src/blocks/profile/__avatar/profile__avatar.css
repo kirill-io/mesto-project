@@ -1,15 +1,32 @@
 .profile__avatar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   width: 120px;
   height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.profile__avatar:hover .profile__avatar-image-edit {
+  opacity: 1;
+}
+
+.profile__avatar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  background-color: var(--colorBlack);
+  opacity: 0;
+  transition: opacity .3s ease-out;
+}
+
+.profile__avatar:hover::after {
+  opacity: .8;
 }

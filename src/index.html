@@ -10,19 +10,20 @@
   <meta name="author" content="Кирилл Бегей">
   <title>Социальная сеть Место</title>
 </head>
-<body class="root" data-type-popup="popupImage">
+<body class="root">
   <header class="header">
     <img src="<%=require('./images/header/logo.svg')%>" alt="Логотип сайта Место." class="logo"/>
   </header>
   <main class="content">
     <section class="profile">
       <div class="profile__avatar">
-        <img class="profile__avatar-image" src="<%=require('./images/profile/avatar.png')%>"
-            alt="Аватар пользователя."/>
+        <img class="profile__avatar-image" src=""
+              alt="Аватар пользователя."/>
+        <img src="<%=require('./images/profile/avatar-edit-icon.svg')%>" alt="Редактировать аватар пользователя." class="profile__avatar-image-edit"/>
       </div>
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__description">Исследователь океана</p>
+        <h1 class="profile__name"></h1>
+        <p class="profile__description"></p>
         <button class="profile__edit" type="button" aria-label="Редактировать профиль" data-type-popup="popupEdit"></button>
       </div>
       <button class="profile__add" type="button" aria-label="Загрузить публикацию" data-type-popup="popupAdd"></button>
@@ -46,7 +47,7 @@
             <span class="input-name-error popup__input-error"></span>
           </label>
           <label class="popup__field">
-            <input type="text" name="inputDescription" class="popup__input" id="input-desc" placeholder="О себе" minlength="2" maxlength="200" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." data-type-popup="popupEdit" required>
+            <input type="text" name="inputDescription" class="popup__input" id="input-desc" placeholder="О себе" minlength="2" maxlength="200" pattern="^[^ |^\-][a-zA-Z|а-яА-яЁё|\s|,|\-]+$" data-error-message="Разрешены латинские, кириллические буквы, дефисы и пробелы." data-type-popup="popupEdit" required>
             <span class="input-desc-error popup__input-error">Вы пропустили это поле.</span>
           </label>
         </div>
@@ -81,13 +82,40 @@
       <button class="popup__close" type="button"  aria-label="Закрыть окно просмотра изображения"></button>
     </figure>
   </div>
+  <div class="popup" id="popupDeleteImage">
+    <div class="popup__container popup__container_type_delete">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form name="deleteForm" class="popup__form" novalidate>
+        <button class="popup__delete" name="popupDelete" type="submit">Да</button>
+      </form>
+      <button class="popup__close" type="button"  aria-label="Закрыть окно добаления новой публикации"></button>
+    </div>
+  </div>
+  <div class="popup" id="popupAvatarEdit">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form name="avatarEditForm" class="popup__form" novalidate>
+        <div class="popup__inputs">
+          <label class="popup__field">
+            <input type="url" name="inputLink" class="popup__input" id="input-link" placeholder="Ссылка на аватар" data-type-popup="popupAvatarEdit" required>
+            <span class="input-link-error popup__input-error"></span>
+          </label>
+        </div>
+        <button class="popup__save" name="popupSave" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close" type="button"  aria-label="Закрыть окно добаления новой публикации"></button>
+    </div>
+  </div>
   <template id="elementTemplate">
     <li class="element">
-      <button class="element__remove" type="button" aria-label="Удалить публикацию"></button>
+      <button class="element__remove" type="button" aria-label="Удалить публикацию" data-type-popup="popupDeleteImage"></button>
       <img class="element__image"/>
       <div class="element__text-container">
         <h2 class="element__name"></h2>
-        <button class="element__like" type="button" aria-label="Поставить лайк публикации"></button>
+        <div class="element__like-container">
+          <button class="element__like" type="button" aria-label="Поставить лайк публикации"></button>
+          <span class="element__like-amount"></span>
+        </div>
       </div>
     </li>
   </template>
