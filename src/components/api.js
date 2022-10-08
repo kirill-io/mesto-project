@@ -1,10 +1,18 @@
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+
 export const getUserInformation = () => {
   return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-15/users/me', {
     method: 'GET',
     headers: {
       authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
     }
-  });
+  })
+  .then(checkResponse);
 };
 
 export const getInitialCards = () => {
@@ -13,7 +21,8 @@ export const getInitialCards = () => {
     headers: {
       authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
     }
-  });
+  })
+  .then(checkResponse);
 };
 
 export const changeUserData = (nameUser, aboutUser) => {
@@ -27,7 +36,8 @@ export const changeUserData = (nameUser, aboutUser) => {
       name: `${nameUser}`,
       about: `${aboutUser}`
     })
-  });
+  })
+  .then(checkResponse);
 };
 
 export const addNewCard = (nameImage, linkImage) => {
@@ -41,7 +51,8 @@ export const addNewCard = (nameImage, linkImage) => {
       name: `${nameImage}`,
       link: `${linkImage}`
     })
-  });
+  })
+  .then(checkResponse);
 };
 
 export const deleteCard = (cardId) => {
@@ -50,7 +61,8 @@ export const deleteCard = (cardId) => {
     headers: {
       authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
     }
-  });
+  })
+  .then(checkResponse);
 };
 
 export const addLikeCard = (cardId) => {
@@ -59,7 +71,8 @@ export const addLikeCard = (cardId) => {
     headers: {
       authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
     }
-  });
+  })
+  .then(checkResponse);
 };
 
 export const deleteLikeCard = (cardId) => {
@@ -68,7 +81,8 @@ export const deleteLikeCard = (cardId) => {
     headers: {
       authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
     }
-  });
+  })
+  .then(checkResponse);
 };
 
 export const updateAvatar = (avatarLink) => {
@@ -81,5 +95,6 @@ export const updateAvatar = (avatarLink) => {
     body: JSON.stringify({
       avatar: avatarLink
     })
-  });
+  })
+  .then(checkResponse);
 };

@@ -5,9 +5,8 @@ import {setAttribute} from './utils.js';
 import {addLikeCard, deleteLikeCard, deleteCard} from './api.js'
 
 export const createElement = (cardData, userData) => {
-  let element;
+  const element = elementTemplate.querySelector('.element').cloneNode(true);
   let elementImage;
-  element = elementTemplate.querySelector('.element').cloneNode(true);
   if (cardData._id) {
     setAttribute(element, 'data-id', `${cardData._id}`);
   }
@@ -23,7 +22,7 @@ export const createElement = (cardData, userData) => {
     popupPictureText.textContent = cardData.name;
   });
   if (cardData.hasOwnProperty('owner') && cardData.owner.hasOwnProperty('_id')) {
-    if (cardData.owner._id !==  userData._id) {
+    if (cardData.owner._id !== userData._id) {
       element.querySelector('.element__remove').classList.add('element__remove_inactive');
     } else if (cardData.owner._id ===  userData._id) {
       element.querySelector('.element__remove').addEventListener('click', removeElementHandler);
@@ -59,34 +58,22 @@ const removeElement = (elementList, imageRemoveId) => {
 const putLikeHandler = (e) => {
   if (!e.target.classList.contains('element__like_active')) {
     addLikeCard(e.target.dataset.id)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
       .then((result) => {
         checkTheNumberOfLikes(result);
+        putLike(e.target);
       })
       .catch((err) => {
         console.log(err);
       });
-    putLike(e.target);
   } else {
     deleteLikeCard(e.target.dataset.id)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
       .then((result) => {
         checkTheNumberOfLikes(result);
+        putLike(e.target);
       })
       .catch((err) => {
         console.log(err);
       });
-    putLike(e.target);
   }
 };
 
@@ -117,15 +104,11 @@ export const setLikeOnRender = (elementFromTheServer) => {
 export const deleteElementFormSubmitHandler = (e) => {
   e.preventDefault();
   deleteCard(e.path[2].dataset.id)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+    .then(() => {
+      removeElement(constants.elementsList, e.path[2].dataset.id);
+      closePopup(constants.popupDeleteImage);
     })
     .catch((err) => {
       console.log(err);
     });
-  removeElement(constants.elementsList, e.path[2].dataset.id);
-  closePopup(constants.popupDeleteImage);
 };

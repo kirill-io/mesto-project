@@ -17,7 +17,7 @@ export const closePopup = (popup) => {
 
 const closeByEscPress = (e) => {
   if (e.key === 'Escape') {
-    closePopup(document.getElementById(`${e.target.dataset.typePopup}`));
+    closePopup(document.querySelector(`#${document.querySelector(`[data-type-popup="${e.target.dataset.typePopup}"`).dataset.typePopup}`));
   }
 };
 
@@ -31,18 +31,14 @@ export const editProfileFormSubmitHandler = (e) => {
   profileName.textContent = inputName.value;
   profileDesc.textContent = inputDesc.value;
   changeUserData(inputName.value, inputDesc.value)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+    .then(() => {
+      closePopup(constants.popupEdit);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       changeSaveButton(constants.buttonPopupEditSave, false);
-      closePopup(constants.popupEdit);
     });
   changeSaveButton(constants.buttonPopupEditSave, true);
 };
@@ -68,21 +64,15 @@ export const changeSaveButton = (buttonSave, isSaving) => {
 export const updateAvatarFormSubmitHandler = (e) => {
   e.preventDefault();
   updateAvatar(e.target[0].value)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
     .then((result) => {
       constants.profileAvatarImage.src = result.avatar;
+      closePopup(constants.popupAvatarEdit);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() =>{
       changeSaveButton(constants.buttonAvatarEditSave, false);
-      closePopup(constants.popupAvatarEdit);
     });
   changeSaveButton(constants.buttonAvatarEditSave, true);
 };
