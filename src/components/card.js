@@ -6,12 +6,11 @@ import {addLikeCard, deleteLikeCard, deleteCard} from './api.js'
 
 export const createElement = (cardData, userData) => {
   const element = elementTemplate.querySelector('.element').cloneNode(true);
-  let elementImage;
+  const elementImage = element.querySelector('.element__image');
   if (cardData._id) {
     setAttribute(element, 'data-id', `${cardData._id}`);
   }
   element.querySelector('.element__name').textContent = cardData.name;
-  elementImage = element.querySelector('.element__image');
   elementImage.src = cardData.link;
   elementImage.alt = `${cardData.name}.`;
   elementImage.addEventListener('click', () => {

@@ -28,10 +28,10 @@ export const fillInFormInputs = (name, description, nameField, descriptionField)
 
 export const editProfileFormSubmitHandler = (e) => {
   e.preventDefault();
-  profileName.textContent = inputName.value;
-  profileDesc.textContent = inputDesc.value;
   changeUserData(inputName.value, inputDesc.value)
     .then(() => {
+      profileName.textContent = inputName.value;
+      profileDesc.textContent = inputDesc.value;
       closePopup(constants.popupEdit);
     })
     .catch((err) => {

@@ -1,3 +1,11 @@
+const config = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort-15',
+  headers: {
+    authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91',
+    'Content-Type': 'application/json'
+  }
+}
+
 const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -6,31 +14,31 @@ const checkResponse = (res) => {
 };
 
 export const getUserInformation = () => {
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-15/users/me', {
+  return fetch(`${config.baseUrl}/users/me`, {
     method: 'GET',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
+      authorization: config.headers.authorization
     }
   })
   .then(checkResponse);
 };
 
 export const getInitialCards = () => {
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-15/cards', {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'GET',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
+      authorization: config.headers.authorization
     }
   })
   .then(checkResponse);
 };
 
 export const changeUserData = (nameUser, aboutUser) => {
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-15/users/me', {
+  return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91',
-      'Content-Type': 'application/json'
+      authorization: config.headers.authorization,
+      'Content-Type': config.headers['Content-Type']
     },
     body: JSON.stringify({
       name: `${nameUser}`,
@@ -41,11 +49,11 @@ export const changeUserData = (nameUser, aboutUser) => {
 };
 
 export const addNewCard = (nameImage, linkImage) => {
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-15/cards', {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91',
-      'Content-Type': 'application/json'
+      authorization: config.headers.authorization,
+      'Content-Type': config.headers['Content-Type']
     },
     body: JSON.stringify({
       name: `${nameImage}`,
@@ -56,41 +64,41 @@ export const addNewCard = (nameImage, linkImage) => {
 };
 
 export const deleteCard = (cardId) => {
-  return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-15/cards/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
+      authorization: config.headers.authorization
     }
   })
   .then(checkResponse);
 };
 
 export const addLikeCard = (cardId) => {
-  return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-15/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
+      authorization: config.headers.authorization
     }
   })
   .then(checkResponse);
 };
 
 export const deleteLikeCard = (cardId) => {
-  return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-15/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91'
+      authorization: config.headers.authorization
     }
   })
   .then(checkResponse);
 };
 
 export const updateAvatar = (avatarLink) => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-15/users/me/avatar', {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: {
-      authorization: '901b5f54-a3c1-49a6-b698-d1aa30508c91',
-      'Content-Type': 'application/json'
+      authorization: config.headers.authorization,
+      'Content-Type': config.headers['Content-Type']
     },
     body: JSON.stringify({
       avatar: avatarLink
