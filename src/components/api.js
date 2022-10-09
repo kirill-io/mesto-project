@@ -36,10 +36,7 @@ export const getInitialCards = () => {
 export const changeUserData = (nameUser, aboutUser) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': config.headers['Content-Type']
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: `${nameUser}`,
       about: `${aboutUser}`
@@ -51,10 +48,7 @@ export const changeUserData = (nameUser, aboutUser) => {
 export const addNewCard = (nameImage, linkImage) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': config.headers['Content-Type']
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: `${nameImage}`,
       link: `${linkImage}`
@@ -96,10 +90,7 @@ export const deleteLikeCard = (cardId) => {
 export const updateAvatar = (avatarLink) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
-    headers: {
-      authorization: config.headers.authorization,
-      'Content-Type': config.headers['Content-Type']
-    },
+    headers: config.headers,
     body: JSON.stringify({
       avatar: avatarLink
     })
