@@ -4,7 +4,7 @@ import {enableValidation, resetForm, clearFields} from './validate.js'
 import {createElement, deleteElementFormSubmitHandler, setLikeOnRender} from './card.js';
 import {openPopup, closePopup, fillInFormInputs, editProfileFormSubmitHandler, addPopupCloseHandlerOnClickOnOverlay, changeSaveButton, profileAvatarEditHandler, updateAvatarFormSubmitHandler} from './modal.js';
 import {checkPlaceName, saveData, fillInUserData, setAttribute} from './utils.js';
-import {getUserInformation, getInitialCards, addNewCard} from './api.js';
+import {getUserInformation, getInitialCards, addNewCard} from './Api.js';
 
 const buttonEditProfile = document.querySelector('.profile__edit');
 const buttonAddPlace = document.querySelector('.profile__add');

@@ -2,7 +2,7 @@ import * as constants from './constants.js';
 import {popupPictureText, elementTemplate, popupPicture} from './constants.js';
 import {openPopup, closePopup} from '../components/modal.js';
 import {setAttribute} from './utils.js';
-import {addLikeCard, deleteLikeCard, deleteCard} from './api.js'
+import {addLikeCard, deleteLikeCard, deleteCard} from './Api.js'
 
 export const createElement = (cardData, userData) => {
   const element = elementTemplate.querySelector('.element').cloneNode(true);
