@@ -2,6 +2,7 @@ import '../pages/index.css';
 import * as constants from './constants.js';
 import Api from './Api.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 let idUser;
 
@@ -46,3 +47,6 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
 //   .then((res) => {
 //     console.log(res);
 //   })
+
+const fordAddValidator = new FormValidator(constants.validationConfig, constants.formAddProfile);
+fordAddValidator.enableValidation();

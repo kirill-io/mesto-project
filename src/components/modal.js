@@ -1,7 +1,7 @@
 import * as constants from './constants.js';
 import {profileName, profileDesc, inputName, inputDesc} from './constants.js';
 import {changeUserData, updateAvatar} from './Api.js';
-import {resetForm, clearFields} from './validate.js';
+// import {resetForm, clearFields} from './validate.js';
 import {setAttribute} from './utils.js';
 
 
