@@ -1,6 +1,6 @@
-class Api {
+export default class Api {
   constructor({ baseUrl, headers }) {
-    this._url = baseUrl;
+    this._baseUrl = baseUrl;
     this._headers = headers;
   }
 
@@ -18,7 +18,9 @@ class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   getInitialCards() {
@@ -28,7 +30,9 @@ class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   changeUserData(nameUser, aboutUser) {
@@ -40,7 +44,9 @@ class Api {
         about: `${aboutUser}`
       })
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   addNewCard(nameImage, linkImage) {
@@ -52,7 +58,9 @@ class Api {
         link: `${linkImage}`
       })
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   deleteCard(cardId) {
@@ -62,7 +70,9 @@ class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   addLikeCard(cardId) {
@@ -72,7 +82,9 @@ class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   deleteLikeCard(cardId) {
@@ -82,7 +94,9 @@ class Api {
         authorization: this._headers.authorization
       }
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 
   updateAvatar(avatarLink) {
@@ -93,6 +107,8 @@ class Api {
         avatar: avatarLink
       })
     })
-    .then(this._checkResponse());
+      .then((res) => {
+        return this._checkResponse(res);
+      });
   }
 }
