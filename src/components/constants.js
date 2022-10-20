@@ -14,3 +14,7 @@ export const validationConfig = {
   errorClass: 'popup__input-error_active',
   inactiveButtonClass: 'popup__save_inactive'
 };
+
+export const buttonEdit = document.querySelector('.profile__edit');
+export const buttonAvatar = document.querySelector('.profile__avatar-image-edit');
+export const buttonCreate = document.querySelector('.profile__add');

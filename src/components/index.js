@@ -3,6 +3,7 @@ import * as constants from './constants.js';
 import Api from './Api.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Popup from './Popup.js';
 
 let idUser;
 
@@ -50,3 +51,22 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
 
 const fordAddValidator = new FormValidator(constants.validationConfig, constants.formAddProfile);
 fordAddValidator.enableValidation();
+
+
+const popupAvatar = new Popup('popupAvatarEdit');
+
+constants.buttonAvatar.addEventListener('click', () => {
+  popupAvatar.opene();
+})
+
+const popupEdit = new Popup('popupEdit');
+
+constants.buttonEdit.addEventListener('click', () => {
+  popupEdit.opene();
+});
+
+const popupCreate = new Popup('popupAdd');
+
+constants.buttonCreate.addEventListener('click', () => {
+  popupCreate.opene();
+});
