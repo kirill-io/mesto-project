@@ -5,6 +5,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Popup from './Popup.js';
 import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
 
 let idUser;
 
@@ -64,17 +65,24 @@ fordAddValidator.enableValidation();
 const popupAvatar = new Popup('popupAvatarEdit');
 
 constants.buttonAvatar.addEventListener('click', () => {
-  popupAvatar.opene();
+  popupAvatar.open();
 })
 
 const popupEdit = new Popup('popupEdit');
 
 constants.buttonEdit.addEventListener('click', () => {
-  popupEdit.opene();
+  popupEdit.open();
 });
 
 const popupCreate = new Popup('popupAdd');
 
 constants.buttonCreate.addEventListener('click', () => {
-  popupCreate.opene();
+  popupCreate.open();
+});
+
+const popupImage = new PopupWithImage('popupImage');
+document.querySelector('.elements__list').addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('element__image')) {
+    popupImage.open(evt.target);
+  }
 });
