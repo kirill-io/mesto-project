@@ -9,13 +9,13 @@ export default class Popup {
     this._addEventListeners();
   }
 
-  _close() {
+  close() {
     this._popup.classList.remove('popup_opened');
     this._removeEventListeners();
   }
 
   _addEventListeners() {
-    this._clickCloseButton = this._close.bind(this);
+    this._clickCloseButton = this.close.bind(this);
     this._closeButton.addEventListener('click', this._clickCloseButton);
 
     this._clickOverlay = this._handleOverlayClode.bind(this);
@@ -32,10 +32,10 @@ export default class Popup {
   }
 
   _handleEscClose(evt) {
-    if (evt.key === 'Escape') this._close();
+    if (evt.key === 'Escape') this.close();
   }
 
   _handleOverlayClode(evt) {
-    if (evt.target === evt.currentTarget) this._close();
+    if (evt.target === evt.currentTarget) this.close();
   }
 }

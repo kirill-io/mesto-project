@@ -6,12 +6,16 @@ export default class Section {
   }
 
   renderItems() {
+    if (!Array.isArray(this._cardsArray)) {
+      this._cardsArray = [this._cardsArray];
+    }
+
     this._cardsArray.forEach(item => {
       this._renderer(item);
     });
   }
 
   addItem(item) {
-    this._container.append(item);
+    this._container.prepend(item);
   }
 }
