@@ -100,15 +100,13 @@ export default class Api {
   }
 
   updateAvatar(avatarLink) {
-    return fetch(`${config.baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatarLink
       })
     })
-      .then((res) => {
-        return this._checkResponse(res);
-      });
+      .then(this._checkResponse);
   }
 }
