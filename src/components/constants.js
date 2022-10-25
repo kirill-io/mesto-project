@@ -6,7 +6,9 @@ export const config = {
   }
 };
 
-export const formAddProfile = document.forms.addForm;
+export const formAdd = document.forms.addForm;
+export const formEdit = document.forms.editForm;
+export const formAvatar = document.forms.avatarEditForm;
 export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
