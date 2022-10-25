@@ -1,26 +1,32 @@
 import '../pages/index.css';
 import * as constants from './constants.js';
+import { fillFieldValues } from './utils.js';
 import Api from './Api.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 let idUser;
 
 const api = new Api(constants.config);
+const userInfo = new UserInfo(constants.userSelectorsConfig);
 
 
 Promise.all([api.getUserInformation(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    idUser = userData._id;
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
+    userInfo.setUserId(userData);
+
     const cardList = new Section({
       items: cards.reverse(),
       renderer: (item) => {
         const cardElement = new Card({
           data: item,
-          idUser: idUser,
+          idUser: userInfo.getUserId(),
           putLike: (item) => {
             api.addLikeCard(item)
               .then((res) => {
@@ -67,7 +73,7 @@ const popupAvatar = new PopupWithForm('popupAvatarEdit', {
     popupAvatar.sumbitTextIsSaving();
     api.updateAvatar(element.inputLink)
       .then((res) => {
-        document.querySelector('.profile__avatar-image').src = res.avatar;
+        userInfo.setUserAvatar(res);
         popupAvatar.close();
       })
       .catch((err) => {
@@ -86,10 +92,9 @@ constants.buttonAvatar.addEventListener('click', () => {
 const popupEdit = new PopupWithForm('popupEdit', {
   hendlerSubmit: (element) => {
     popupEdit.sumbitTextIsSaving();
-    api.changeUserData(element.inputName, element.inputDescription)
+    api.changeUserData(element.inputName, element.inputAbout)
       .then((res) => {
-        document.querySelector('.profile__name').textContent = res.name;
-        document.querySelector('.profile__description').textContent = res.about;
+        userInfo.setUserInfo(res);
         popupEdit.close();
       })
       .catch((err) => {
@@ -102,6 +107,7 @@ const popupEdit = new PopupWithForm('popupEdit', {
 });
 
 constants.buttonEdit.addEventListener('click', () => {
+  fillFieldValues('editForm', userInfo.getUserInfo());
   popupEdit.open();
 });
 
@@ -115,7 +121,7 @@ const popupCreate = new PopupWithForm('popupAdd', {
           renderer: (item) => {
             const cardElement = new Card({
               data: item,
-              idUser: idUser,
+              idUser: userInfo.getUserId(),
               putLike: (item) => {
                 api.addLikeCard(item)
                   .then((res) => {
@@ -163,3 +169,5 @@ document.querySelector('.elements__list').addEventListener('click', (evt) => {
     popupImage.open(evt.target);
   }
 });
+
+
