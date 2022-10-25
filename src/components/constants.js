@@ -15,6 +15,12 @@ export const validationConfig = {
   inactiveButtonClass: 'popup__save_inactive'
 };
 
+export const userSelectorsConfig = {
+  name: '.profile__name',
+  about: '.profile__description',
+  avatar: '.profile__avatar-image'
+}
+
 export const buttonEdit = document.querySelector('.profile__edit');
 export const buttonAvatar = document.querySelector('.profile__avatar-image-edit');
 export const buttonCreate = document.querySelector('.profile__add');
