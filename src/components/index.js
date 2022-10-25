@@ -1,15 +1,12 @@
 import '../pages/index.css';
 import * as constants from './constants.js';
-import { fillFieldValues } from './utils.js';
+import { fillFieldValues, renderCard } from './utils.js';
 import Api from './Api.js';
-import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-
-let idUser;
 
 const api = new Api(constants.config);
 const userInfo = new UserInfo(constants.userSelectorsConfig);
@@ -24,30 +21,7 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     const cardList = new Section({
       items: cards.reverse(),
       renderer: (item) => {
-        const cardElement = new Card({
-          data: item,
-          idUser: userInfo.getUserId(),
-          putLike: (item) => {
-            api.addLikeCard(item)
-              .then((res) => {
-                cardElement.like(res.likes);
-              })
-          },
-          deleteLike: (item) => {
-            api.deleteLikeCard(item)
-              .then((res) => {
-                cardElement.like(res.likes);
-              })
-          },
-          deleteCard: (item, cardId) => {
-            api.deleteCard(cardId)
-              .then(() => {
-                item.remove();
-              })
-          }
-        },'element');
-        const card = cardElement.renderer();
-        cardList.addItem(card);
+        renderCard(item, userInfo.getUserId(), api, cardList);
       }
     }, '.elements__list');
     cardList.renderItems();
@@ -56,17 +30,14 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     console.log(err);
   });
 
-
-
-
-// api.addNewCard('forest', 'https://img.desktopwallpapers.ru/rocks/pics/wide/1920x1200/27640f370156a0e0ae3ee9608fc8480a.jpg')
-//   .then((res) => {
-//     console.log(res);
-//   })
-
-const fordAddValidator = new FormValidator(constants.validationConfig, constants.formAddProfile);
+const fordAddValidator = new FormValidator(constants.validationConfig, constants.formAdd);
 fordAddValidator.enableValidation();
 
+const fordEditValidator = new FormValidator(constants.validationConfig, constants.formEdit);
+fordEditValidator.enableValidation();
+
+const fordAvatarValidator = new FormValidator(constants.validationConfig, constants.formAvatar);
+fordAvatarValidator.enableValidation();
 
 const popupAvatar = new PopupWithForm('popupAvatarEdit', {
   hendlerSubmit: (element) => {
@@ -86,6 +57,7 @@ const popupAvatar = new PopupWithForm('popupAvatarEdit', {
 });
 
 constants.buttonAvatar.addEventListener('click', () => {
+  fordAvatarValidator.resetValidation();
   popupAvatar.open();
 })
 
@@ -107,6 +79,7 @@ const popupEdit = new PopupWithForm('popupEdit', {
 });
 
 constants.buttonEdit.addEventListener('click', () => {
+  fordEditValidator.resetValidation();
   fillFieldValues('editForm', userInfo.getUserInfo());
   popupEdit.open();
 });
@@ -119,30 +92,7 @@ const popupCreate = new PopupWithForm('popupAdd', {
         const cardList = new Section({
           items: cards,
           renderer: (item) => {
-            const cardElement = new Card({
-              data: item,
-              idUser: userInfo.getUserId(),
-              putLike: (item) => {
-                api.addLikeCard(item)
-                  .then((res) => {
-                    cardElement.like(res.likes);
-                  })
-              },
-              deleteLike: (item) => {
-                api.deleteLikeCard(item)
-                  .then((res) => {
-                    cardElement.like(res.likes);
-                  })
-              },
-              deleteCard: (item, cardId) => {
-                api.deleteCard(cardId)
-                  .then(() => {
-                    item.remove();
-                  })
-              }
-            },'element');
-            const card = cardElement.renderer();
-            cardList.addItem(card);
+            renderCard(item, userInfo.getUserId(), cardList);
           }
         }, '.elements__list');
         cardList.renderItems();
@@ -158,9 +108,8 @@ const popupCreate = new PopupWithForm('popupAdd', {
 });
 
 constants.buttonCreate.addEventListener('click', () => {
+  fordAddValidator.resetValidation();
   popupCreate.open();
-
-
 });
 
 const popupImage = new PopupWithImage('popupImage');

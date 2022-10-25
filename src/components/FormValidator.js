@@ -63,7 +63,9 @@ export default class FormValidator {
   _hasInvalidInput() {
     let invalidInput;
     this._inputList.forEach((inputElement) => {
-      !inputElement.validity.valid ? invalidInput = true : invalidInput = false;
+      if (!inputElement.validity.valid) {
+        invalidInput = true;
+      }
     });
     return invalidInput;
   };
@@ -90,6 +92,16 @@ export default class FormValidator {
 
   enableValidation() {
     this._setEventListener();
+  };
+
+  resetValidation() {
+    this._inputList.forEach((input) => {
+      input.classList.remove(this._inputErrorClass);
+      this._searchErrorMessage(input).textContent = '';
+      this._searchErrorMessage(input).classList.remove(this._errorClass);
+    });
+    this._buttonSave.disabled = false;
+    this._buttonSave.classList.remove(this._inactiveButtonClass);
   };
 }
 
