@@ -11,12 +11,25 @@ export default class FormValidator {
       this._errorClass = errorClass;
       this._inactiveButtonClass = inactiveButtonClass;
       this._formElement = formElement;
-
       this._inputList = formElement.querySelectorAll(inputSelector);
       this._buttonSave = formElement.elements.popupSave;
       this._inputError;
       this._inputMessage;
   }
+
+  enableValidation() {
+    this._setEventListener();
+  };
+
+  resetValidation() {
+    this._inputList.forEach((input) => {
+      input.classList.remove(this._inputErrorClass);
+      this._searchErrorMessage(input).textContent = '';
+      this._searchErrorMessage(input).classList.remove(this._errorClass);
+    });
+    this._buttonSave.disabled = false;
+    this._buttonSave.classList.remove(this._inactiveButtonClass);
+  };
 
   _searchErrorMessage(formInput) {
     return document.querySelector(`.${formInput.id}-error`);
@@ -88,20 +101,6 @@ export default class FormValidator {
         this._toggleButtonState();
       });
     });
-  };
-
-  enableValidation() {
-    this._setEventListener();
-  };
-
-  resetValidation() {
-    this._inputList.forEach((input) => {
-      input.classList.remove(this._inputErrorClass);
-      this._searchErrorMessage(input).textContent = '';
-      this._searchErrorMessage(input).classList.remove(this._errorClass);
-    });
-    this._buttonSave.disabled = false;
-    this._buttonSave.classList.remove(this._inactiveButtonClass);
   };
 }
 

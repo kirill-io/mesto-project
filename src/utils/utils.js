@@ -1,5 +1,5 @@
-import Card from './Card.js';
-import PopupDeleteImage from './PopupDeleteImage.js';
+import Card from '../components/Card.js';
+import PopupDeleteImage from '../components/PopupDeleteImage.js';
 
 export const fillFieldValues = (formSelector, userData) => {
   const form = document.forms[formSelector];
