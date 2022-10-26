@@ -5,14 +5,10 @@ export default class Card {
     this._likes = data.likes;
     this._cardId = data._id;
     this._cardOwner = data.owner._id;
-
     this._idUser = idUser;
-
     this._putLike = putLike;
     this._deleteLike = deleteLike;
-
     this._deleteCard = deleteCard;
-
     this._selector = selector;
   }
 
@@ -24,11 +20,8 @@ export default class Card {
     this._element.querySelector('.element__name').textContent = this._name;
 
     this._getNumberOfLikes(this._likes);
-
     this._checkOwnerLike(this._likes);
-
     this._showTrashOnOwnerCard();
-
     this._setEventListeners();
 
     return this._element;

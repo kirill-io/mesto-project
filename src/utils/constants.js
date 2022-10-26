@@ -9,6 +9,10 @@ export const config = {
 export const formAdd = document.forms.addForm;
 export const formEdit = document.forms.editForm;
 export const formAvatar = document.forms.avatarEditForm;
+export const buttonEdit = document.querySelector('.profile__edit');
+export const buttonAvatar = document.querySelector('.profile__avatar-image-edit');
+export const buttonCreate = document.querySelector('.profile__add');
+
 export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -22,7 +26,3 @@ export const userSelectorsConfig = {
   about: '.profile__description',
   avatar: '.profile__avatar-image'
 }
-
-export const buttonEdit = document.querySelector('.profile__edit');
-export const buttonAvatar = document.querySelector('.profile__avatar-image-edit');
-export const buttonCreate = document.querySelector('.profile__add');
