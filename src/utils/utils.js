@@ -1,15 +1,7 @@
 import Card from '../components/Card.js';
 import PopupDeleteImage from '../components/PopupDeleteImage.js';
 
-export const fillFieldValues = (formSelector, userData) => {
-  const form = document.forms[formSelector];
-  form.querySelectorAll('input').forEach((input) => {
-    const attributeName = input.getAttribute('name');
-    input.value = userData[attributeName];
-  });
-};
-
-export const renderCard = (item, id, api, cardList) => {
+export const renderCard = (item, id, api, cardList, popupImage) => {
   const cardElement = new Card({
     data: item,
     idUser: id,
@@ -33,8 +25,8 @@ export const renderCard = (item, id, api, cardList) => {
     },
     deleteCard: (item, cardId) => {
       const popupDelete = new PopupDeleteImage('popupDeleteImage', {
-        hendlerSubmit: () => {
-          popupDelete.sumbitTextIsUninstalling();
+        hendleSubmit: () => {
+          popupDelete.renderLoading(true);
           api.deleteCard(cardId)
             .then(() => {
               item.remove();
@@ -44,11 +36,14 @@ export const renderCard = (item, id, api, cardList) => {
               console.log(err);
             })
             .finally(() => {
-              popupDelete.sumbitTextIsUninstall();
+              popupDelete.renderLoading(false);
             });
         }
       });
       popupDelete.open();
+    },
+    handleCardClick: (image) => {
+      popupImage.open(image);
     }
   },'element');
   const card = cardElement.renderer();

@@ -1,6 +1,6 @@
 import '../pages/index.css';
 import * as constants from '../utils/constants.js';
-import { fillFieldValues, renderCard } from '../utils/utils.js';
+import { renderCard } from '../utils/utils.js';
 import Api from '../components/Api.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -16,8 +16,8 @@ const fordAvatarValidator = new FormValidator(constants.validationConfig, consta
 const popupImage = new PopupWithImage('popupImage');
 
 const popupAvatar = new PopupWithForm('popupAvatarEdit', {
-  hendlerSubmit: (element) => {
-    popupAvatar.sumbitTextIsSaving();
+  hendleSubmit: (element) => {
+    popupAvatar.renderLoading(true);
     api.updateAvatar(element.inputLink)
       .then((res) => {
         userInfo.setUserAvatar(res);
@@ -27,14 +27,14 @@ const popupAvatar = new PopupWithForm('popupAvatarEdit', {
         console.log(err);
       })
       .finally(() => {
-        popupAvatar.sumbitTextIsSave();
+        popupAvatar.renderLoading(false);
       });
   }
 });
 
 const popupEdit = new PopupWithForm('popupEdit', {
-  hendlerSubmit: (element) => {
-    popupEdit.sumbitTextIsSaving();
+  hendleSubmit: (element) => {
+    popupEdit.renderLoading(true);
     api.changeUserData(element.inputName, element.inputAbout)
       .then((res) => {
         userInfo.setUserInfo(res);
@@ -44,20 +44,20 @@ const popupEdit = new PopupWithForm('popupEdit', {
         console.log(err);
       })
       .finally(() => {
-        popupEdit.sumbitTextIsSave();
+        popupEdit.renderLoading(false);
       });
   }
 });
 
 const popupCreate = new PopupWithForm('popupAdd', {
-  hendlerSubmit: (element) => {
-    popupCreate.sumbitTextIsSaving();
+  hendleSubmit: (element) => {
+    popupCreate.renderLoading(true);
     api.addNewCard(element.inputPlace, element.inputLink)
       .then((cards) => {
         const cardList = new Section({
           items: cards,
           renderer: (item) => {
-            renderCard(item, userInfo.getUserId(), api, cardList);
+            renderCard(item, userInfo.getUserId(), api, cardList, popupImage);
           }
         }, '.elements__list');
         cardList.renderItems();
@@ -67,7 +67,7 @@ const popupCreate = new PopupWithForm('popupAdd', {
         console.log(err);
       })
       .finally(() => {
-        popupCreate.sumbitTextIsSave();
+        popupCreate.renderLoading(false);
       });
   }
 });
@@ -81,7 +81,7 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     const cardList = new Section({
       items: cards.reverse(),
       renderer: (item) => {
-        renderCard(item, userInfo.getUserId(), api, cardList);
+        renderCard(item, userInfo.getUserId(), api, cardList, popupImage);
       }
     }, '.elements__list');
     cardList.renderItems();
@@ -101,17 +101,11 @@ constants.buttonAvatar.addEventListener('click', () => {
 
 constants.buttonEdit.addEventListener('click', () => {
   fordEditValidator.resetValidation();
-  fillFieldValues('editForm', userInfo.getUserInfo());
+  popupEdit.setInputValues(userInfo.getUserInfo());
   popupEdit.open();
 });
 
 constants.buttonCreate.addEventListener('click', () => {
   fordAddValidator.resetValidation();
   popupCreate.open();
-});
-
-document.querySelector('.elements__list').addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('element__image')) {
-    popupImage.open(evt.target);
-  }
 });
