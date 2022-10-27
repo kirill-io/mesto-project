@@ -20,7 +20,7 @@ const popupAvatar = new PopupWithForm('popupAvatarEdit', {
     popupAvatar.renderLoading(true);
     api.updateAvatar(element.inputLink)
       .then((res) => {
-        userInfo.setUserAvatar(res);
+        userInfo.setUserInfo(res);
         popupAvatar.close();
       })
       .catch((err) => {
@@ -75,8 +75,6 @@ const popupCreate = new PopupWithForm('popupAdd', {
 Promise.all([api.getUserInformation(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
-    userInfo.setUserAvatar(userData);
-    userInfo.setUserId(userData);
 
     const cardList = new Section({
       items: cards.reverse(),
