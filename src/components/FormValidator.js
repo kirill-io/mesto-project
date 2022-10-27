@@ -23,9 +23,7 @@ export default class FormValidator {
 
   resetValidation() {
     this._inputList.forEach((input) => {
-      input.classList.remove(this._inputErrorClass);
-      this._searchErrorMessage(input).textContent = '';
-      this._searchErrorMessage(input).classList.remove(this._errorClass);
+      this._hideInputError(input);
     });
     this._buttonSave.disabled = false;
     this._buttonSave.classList.remove(this._inactiveButtonClass);
@@ -60,8 +58,10 @@ export default class FormValidator {
 
   _hideInputError(element) {
     element.classList.remove(this._inputErrorClass);
-    this._inputError.textContent = '';
-    this._inputError.classList.remove(this._errorClass);
+    if (this._inputError) {
+      this._inputError.textContent = '';
+      this._inputError.classList.remove(this._errorClass);
+    }
   }
 
   _isValid (formInput) {
