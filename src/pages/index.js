@@ -100,8 +100,8 @@ constants.buttonAvatar.addEventListener('click', () => {
 });
 
 constants.buttonEdit.addEventListener('click', () => {
-  fordEditValidator.resetValidation();
   popupEdit.setInputValues(userInfo.getUserInfo());
+  fordEditValidator.resetValidation();
   popupEdit.open();
 });
 

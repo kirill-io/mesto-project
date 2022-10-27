@@ -25,8 +25,7 @@ export default class FormValidator {
     this._inputList.forEach((input) => {
       this._hideInputError(input);
     });
-    this._buttonSave.disabled = false;
-    this._buttonSave.classList.remove(this._inactiveButtonClass);
+    this._toggleButtonState();
   };
 
   _searchErrorMessage(formInput) {
