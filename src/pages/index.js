@@ -10,10 +10,24 @@ import UserInfo from '../components/UserInfo.js';
 
 const api = new Api(constants.config);
 const userInfo = new UserInfo(constants.userSelectorsConfig);
-const fordAddValidator = new FormValidator(constants.validationConfig, constants.formAdd);
-const fordEditValidator = new FormValidator(constants.validationConfig, constants.formEdit);
-const fordAvatarValidator = new FormValidator(constants.validationConfig, constants.formAvatar);
 const popupImage = new PopupWithImage('popupImage');
+
+const formValidators = {};
+
+const enableValidation = (formConfig) => {
+  const formList = Array.from(document.querySelectorAll(formConfig.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formConfig, formElement);
+    const formName = formElement.getAttribute('name');
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(constants.validationConfig);
+
+console.log(formValidators);
 
 const popupAvatar = new PopupWithForm('popupAvatarEdit', {
   hendleSubmit: (element) => {
@@ -88,22 +102,18 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     console.log(err);
   });
 
-fordAddValidator.enableValidation();
-fordEditValidator.enableValidation();
-fordAvatarValidator.enableValidation();
-
 constants.buttonAvatar.addEventListener('click', () => {
-  fordAvatarValidator.resetValidation();
+  formValidators['avatarEditForm'].resetValidation();
   popupAvatar.open();
 });
 
 constants.buttonEdit.addEventListener('click', () => {
   popupEdit.setInputValues(userInfo.getUserInfo());
-  fordEditValidator.resetValidation();
+  formValidators['editForm'].resetValidation();
   popupEdit.open();
 });
 
 constants.buttonCreate.addEventListener('click', () => {
-  fordAddValidator.resetValidation();
+  formValidators['addForm'].resetValidation();
   popupCreate.open();
 });
