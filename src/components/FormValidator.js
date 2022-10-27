@@ -29,7 +29,7 @@ export default class FormValidator {
   };
 
   _searchErrorMessage(formInput) {
-    return document.querySelector(`.${formInput.id}-error`);
+    return this._formElement.querySelector(`.${formInput.id}-error`);
   }
 
   _selectionErrorMessage(formInput) {
