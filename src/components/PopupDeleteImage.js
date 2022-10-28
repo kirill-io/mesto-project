@@ -8,6 +8,13 @@ export default class PopupDeleteImage extends Popup {
     this._buttonDeleteText = this._buttonDelete.textContent;
   }
 
+  open(item, cardId) {
+    super.open();
+
+    this._item = item;
+    this._cardId = cardId;
+  }
+
   renderLoading(isLoading, loadingText = 'Сохранение...') {
     if (isLoading) {
       this._buttonDelete.textContent = loadingText;
@@ -27,8 +34,10 @@ export default class PopupDeleteImage extends Popup {
     this._popup.removeEventListener('submit', this._clickSubmit);
   }
 
+
+
   _clickOnSubmit(evt) {
     evt.preventDefault();
-    this._hendleSubmit();
+    this._hendleSubmit(this._item, this._cardId);
   }
 }
