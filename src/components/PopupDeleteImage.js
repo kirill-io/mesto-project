@@ -1,18 +1,26 @@
 import Popup from "./Popup.js";
 
 export default class PopupDeleteImage extends Popup {
-  constructor(selector, { hendlerSubmit }) {
+  constructor(selector, { hendleSubmit }) {
     super(selector);
-    this._hendlerSubmit = hendlerSubmit;
+    this._hendleSubmit = hendleSubmit;
     this._buttonDelete = this._popup.querySelector('.popup__delete');
+    this._buttonDeleteText = this._buttonDelete.textContent;
   }
 
-  sumbitTextIsUninstalling() {
-    this._buttonDelete.textContent = 'Удаление...';
+  open(item, cardId) {
+    super.open();
+
+    this._item = item;
+    this._cardId = cardId;
   }
 
-  sumbitTextIsUninstall() {
-    this._buttonDelete.textContent = 'Да';
+  renderLoading(isLoading, loadingText = 'Сохранение...') {
+    if (isLoading) {
+      this._buttonDelete.textContent = loadingText;
+    } else {
+      this._buttonDelete.textContent = this._buttonDeleteText;
+    }
   }
 
   _addEventListeners() {
@@ -26,8 +34,10 @@ export default class PopupDeleteImage extends Popup {
     this._popup.removeEventListener('submit', this._clickSubmit);
   }
 
+
+
   _clickOnSubmit(evt) {
     evt.preventDefault();
-    this._hendlerSubmit();
+    this._hendleSubmit(this._item, this._cardId);
   }
 }

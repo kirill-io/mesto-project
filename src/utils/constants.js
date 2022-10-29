@@ -6,9 +6,6 @@ export const config = {
   }
 };
 
-export const formAdd = document.forms.addForm;
-export const formEdit = document.forms.editForm;
-export const formAvatar = document.forms.avatarEditForm;
 export const buttonEdit = document.querySelector('.profile__edit');
 export const buttonAvatar = document.querySelector('.profile__avatar-image-edit');
 export const buttonCreate = document.querySelector('.profile__add');

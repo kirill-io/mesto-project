@@ -1,13 +1,14 @@
 export default class Section {
-  constructor({ items, renderer }, selector) {
-    this._cardsArray = items;
+  constructor({ renderer }, selector) {
     this._renderer = renderer;
     this._container = document.querySelector(selector);
   }
 
-  renderItems() {
-    if (!Array.isArray(this._cardsArray)) {
-      this._cardsArray = [this._cardsArray];
+  renderItems(items) {
+    if (!Array.isArray(items)) {
+      this._cardsArray = [items];
+    } else {
+      this._cardsArray = items;
     }
 
     this._cardsArray.forEach(item => {
